@@ -7,25 +7,15 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/', (req, res) => {
-  res.json('Hello World!')
+  res.json('website A')
 })
 
-app.post('/login', (req, res) => {
-const username = 'Alya'
-const password = '12345'
-
-if(req.body.username != username){
-  res.json({
-    status: 'error, username not found'
-    })
-}
-if(req.body.password != password){
-  res.json({
-    status: 'error, wrong password'
-    })
-}
-    res.json({ status: 'success' })
-
+app.get('/github-event', (req, res) => {
+  if (req.body.secret != 'secret123') {
+    return res.status(400).json()
+  }
+  console.log('Incoming Webhook')
+  res.json()
 })
 
   app.listen(port, () => {
